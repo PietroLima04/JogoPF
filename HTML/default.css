@@ -1,0 +1,110 @@
+/*Nesta primeira seção os font faces serviram para introduzir duas fontes para o programa*/
+@font-face {
+    font-family: "Antique" ;
+    src: url("../fonts/antiquity-print.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TextoNormal" ;
+    src: url("../fonts/Silver.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*Nesta seção foi estabelecido um básico reset para o arquivo*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "TextoNormal";
+}
+
+/*Aqui a imagem de fundo do menu principal foi estabelecida*/
+body{
+    background-image: url(/Assets/mainmenu.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+/*Em h1 e h3 foram configuradas a aparência e posição do título e do subtítulo do jogo, respectivamente*/
+h1{
+    font-family: "Antique";
+    font-weight: normal;
+    color: rgb(124, 37, 206);
+    margin: 0;
+    text-shadow: 3px 3px 1px black;
+    padding: 1.5rem;
+    font-size: 80px;
+}
+
+h3{
+    font-family: "Antique";
+    font-weight: normal;
+    color:rgb(160, 132, 8);
+    text-shadow: 3px 3px 1px black;
+    padding: 1.5rem;
+    padding-top: 0;
+    font-size: 40px;
+}
+
+/*Aqui foi configurada a posição e organização geral dos botões presentes na tela inicial*/
+.botao {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 1.5rem;
+    padding-top: 15rem;
+}
+
+/*Daqui até a linha 106, os botões foram configurados, estabelendo cor, largura, a fonte de seu texto*/
+/*e mais para o final, o que acontece quando o mouse passa em cima de cada um deles*/
+.botJogar {
+    background-color: rgb(133, 31, 228);
+    width: 300px;
+    height: 100px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 4px 5px 4px black;
+    font-family: "TextoNormal";
+    font-size: 60px;
+    color: aliceblue;
+    padding: 1.7rem;
+}
+
+.botOpcoes {
+    background-color: rgb(133, 31, 228);
+    width: 300px;
+    height: 100px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 4px 5px 4px black;
+    font-family: "TextoNormal";
+    font-size: 60px;
+    color: aliceblue;
+    padding: 1.7rem;
+}
+
+.botFechar {
+    background-color: rgb(133, 31, 228);
+    width: 300px;
+    height: 100px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 4px 5px 4px black;
+    font-family: "TextoNormal";
+    font-size: 60px;
+    color: aliceblue;
+    padding: 1.7rem;
+}
+
+.botJogar:hover, .botOpcoes:hover, .botFechar:hover {
+    background-color: rgb(158, 103, 209);
+}
+
+
+
