@@ -1,7 +1,9 @@
 const initialStones = [
-    { index: 0, x: 50, y: 50, speed: 2, isHidden: false },
-    { index: 1, x: 150, y: 100, speed: 2, isHidden: false },
-    { index: 2, x: 250, y: 150, speed: 2, isHidden: false },
+    { index: 0, x: 50, y: 50, speed: 6, isHidden: false },
+    { index: 1, x: 150, y: 100, speed: 6, isHidden: false },
+    { index: 2, x: 500, y: 150, speed: 6, isHidden: false },
+    { index: 3, x: 200, y: 500, speed: 6, isHidden: false },
+    { index: 4, x: 700, y: 700, speed: 6, isHidden: false },
 ];
 
 const renderStones = (stones) => {

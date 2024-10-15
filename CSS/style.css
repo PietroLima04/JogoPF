@@ -3,21 +3,26 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #e0e0e0;
+    background-color: #353535;
 }
 
 #game {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 800px;
+    height: 800px;
     border: 2px solid #333;
+    background-image: url('../Imagens/espaco.gif'); 
+    background-size: contain; 
+    
 }
 
 #player {
     position: absolute;
     width: 40px;
     height: 40px;
-    background-color: #007BFF;
+    background-image: url('../Imagens/nave.gif'); 
+    background-size: contain; 
+    background-repeat: no-repeat;;
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -26,12 +31,23 @@ body {
 
 .stone {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: #B22222;
-    border-radius: 5px;
+    width: 30px; 
+    height: 30px; 
+    background-image: url('../Imagens/mob.png'); 
+    background-size: contain; 
+    background-repeat: no-repeat;
 }
 
 .stone.hidden {
     display: none;
+}
+
+.nave {
+    position: absolute;
+    width: 40px;
+    height: 40px;;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
 }
