@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e0e0e0;
+    
+}
+
+#game {
+    position: relative;;
+    width: 800px;
+    height: 800px;
+    border: 2px solid #333;
+    background-image: url('../Imagens/espaco.gif'); 
+    background-size: contain; 
+    
+}
+
+#player {
+    position: absolute;
+    width: 23px;
+    height:32px;
+    background-color: #007BFF;
+    border-radius: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url(/Assets/AnimationSheet_Character.png);
+    zoom: 1.5;
+}
+
+
+
+.stone {
+    position: absolute;
+    width: 30px; 
+    height: 30px; 
+    background-image: url('../Imagens/mob.png'); 
+    background-size: contain; 
+    background-repeat: no-repeat;
+}
+
+.stone.hidden {
+    display: none;
+}
+
+.nave {
+    position: absolute;
+    width: 40px;
+    height: 40px;;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
