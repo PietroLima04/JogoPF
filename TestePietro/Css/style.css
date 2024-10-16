@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e0e0e0;
+    
+}
+
+#game {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    border: 2px solid #333;
+}
+
+#player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height:32px;
+    background-color: #007BFF;
+    border-radius: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url(/Assets/AnimationSheet_Character.png);
+    
+    zoom: 1.5;
+}
+
+
+
+
+.stone {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #B22222;
+    border-radius: 5px;
+}
+
+.stone.hidden {
+    display: none;
+}
