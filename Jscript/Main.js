@@ -1,5 +1,5 @@
 const initialStones = [
-    { index: 0, x: 50, y: 50, speed: 2, isHidden: false },
+    { index: 0, x: 25, y: 50, speed: 2, isHidden: false },
     { index: 1, x: 150, y: 100, speed: 2, isHidden: false },
     { index: 2, x: 250, y: 150, speed: 2, isHidden: false },
 ];
@@ -89,3 +89,4 @@ const startGame = () => {
 };
 
 startGame();
+

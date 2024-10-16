@@ -106,5 +106,9 @@ h3{
     background-color: rgb(158, 103, 209);
 }
 
+a:link, a:hover, a:visited, a:active{
+    color: aliceblue;
+    text-decoration: none;
+}
 
 

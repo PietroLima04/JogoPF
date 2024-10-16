@@ -4,10 +4,11 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #e0e0e0;
+    
 }
 
 #game {
-    position: relative;
+    position: relative;;
     width: 400px;
     height: 400px;
     border: 2px solid #333;
@@ -15,14 +16,18 @@ body {
 
 #player {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 23px;
+    height:32px;
     background-color: #007BFF;
-    border-radius: 50%;
+    border-radius: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: url(/Assets/AnimationSheet_Character.png);
+    zoom: 1.5;
 }
+
+
 
 .stone {
     position: absolute;
