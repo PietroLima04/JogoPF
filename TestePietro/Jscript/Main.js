@@ -19,7 +19,7 @@ const createStoneElements = (stones) => {
   
   const appendStonesToGame = ([...stoneElements]) => {
     const gameElement = document.getElementById('game')
-    stoneElements.forEach(stoneElement => gameElement.appendChild(stoneElement))
+    stoneElements.map(stoneElement => gameElement.appendChild(stoneElement))
   }
 
   const moveStones = (stones, centerX, centerY) => {
@@ -41,11 +41,32 @@ const createStoneElements = (stones) => {
     return stones.map((stone) => moveStones(stone, centerX, centerY))
   }
 
+  const checkdistance = (centerX, centerY, stoneX, stoneY) => {
+  const distX = centerX - stoneX
+  const distY = centerY - stoneY
+  return Math.sqrt(distX**2 + distY**2)
+  }
+
+  const checkCollision = (stones, centerX, centerY, centerHitbox) => {
+    return stones.some((stone) => {
+      const distance = checkdistance(centerX, centerY, stone.x, stone.y)
+      return distance <= centerHitbox
+    })
+  }
+
   const loop = (stones, container) => {
+    const centerX = container.offsetWidth / 2
+    const centerY = container.offsetHeight / 2
+    const centerHitbox = 20
     const newStones = updateStones(stones, container)
     container.innerHTML = ''
     const stoneElements = createStoneElements(newStones)
     appendStonesToGame(stoneElements)
+
+    if (checkCollision(stones, centerX, centerY, centerHitbox)) {
+      alert('Game Over!')
+    return
+    }
 
     requestAnimationFrame(() => loop(newStones, container))
   }
