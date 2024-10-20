@@ -31,13 +31,19 @@ const checkCollision = (player, stoneElement) => {
 
 const moveStones = (stones, player) => stones.map(stone => {
     if (stone.isHidden) return stone; // Não move pedras escondidas
+    
+    const playerRect = player.getBoundingClientRect();
+    const gameRect = document.getElementById('game').getBoundingClientRect();
+    
+    // Coordenadas do jogador
+    const playerX = playerRect.left + playerRect.width / 2 - gameRect.left;
+    const playerY = playerRect.top + playerRect.height / 2 - gameRect.top;
 
-    const playerX = player.offsetLeft + player.offsetWidth / 2;
-    const playerY = player.offsetTop + player.offsetHeight / 2;
-    const directionX = playerX - (stone.x + 15);
-    const directionY = playerY - (stone.y + 15);
+    // Direção para a pedra se mover
+    const directionX = playerX - stone.x;
+    const directionY = playerY - stone.y;
     const distance = Math.sqrt(directionX ** 2 + directionY ** 2);
-
+    
     return distance > 0
         ? { ...stone, x: stone.x + (directionX / distance) * stone.speed, y: stone.y + (directionY / distance) * stone.speed }
         : stone;
