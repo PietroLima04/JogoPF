@@ -56,6 +56,10 @@ const handleClick = (event, stones) => {
 
 const checkWinCondition = (stones) => stones.every(stone => stone.isHidden);
 
+const voltarMenu = () => {
+    window.location.href = 'index.html'
+}
+
 const gameLoop = (stones) => {
     const player = document.getElementById('player');
     const updatedStones = moveStones(stones, player);
@@ -66,12 +70,13 @@ const gameLoop = (stones) => {
         if (checkCollision(player, stoneElement) && !updatedStones[index].isHidden) {
             alert('Game Over!');
             clearInterval(gameInterval);
+            voltarMenu()
         }
     });
 
     if (checkWinCondition(updatedStones)) {
         alert('Você venceu!');
-        clearInterval(gameInterval);
+        clearInterval(gameInterval);      
     }
 
     return updatedStones;
