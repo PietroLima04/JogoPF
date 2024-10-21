@@ -95,5 +95,8 @@ const startGame = () => {
     }, 100);
 };
 
+
 startGame();
+
+
 

@@ -1,10 +1,13 @@
 const initialStones = [
-    { index: 0, x: 50, y: 50, speed: 12, isHidden: false },
-    { index: 1, x: 150, y: 100, speed: 12, isHidden: false },
-    { index: 2, x: 500, y: 150, speed: 12, isHidden: false },
-    { index: 3, x: 200, y: 500, speed: 12, isHidden: false },
-    { index: 4, x: 700, y: 700, speed: 12, isHidden: false },
+    { index: 0, x: 10, y: 20, speed: 15, isHidden: false },
+    { index: 1, x: 250, y: 200, speed: 15, isHidden: false },
+    { index: 2, x: 400, y: 250, speed: 15, isHidden: false },
+    { index: 3, x: 300, y: 400, speed: 15, isHidden: false },
+    { index: 4, x: 600, y: 600, speed: 15, isHidden: false },
+    { index: 5, x: 800, y: 800, speed: 15, isHidden: false},
+    { index: 6, x: 900, y: 850, speed: 15, isHidden: false},
 ];
+
 
 const delayTime = 2000; // 2000 ms = 2 segundos
 
@@ -81,8 +84,6 @@ const gameLoop = (stones) => {
     if (checkWinCondition(updatedStones)) {
         alert('Você venceu!');
         clearInterval(gameInterval);
-        window.location.href = 'game4.html'
-        
     }
 
     return updatedStones;
