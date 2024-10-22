@@ -22,11 +22,15 @@
 }
 
 /*Aqui a imagem de fundo do menu principal foi estabelecida*/
-body{
+body, html{
     background-image: url(/Assets/mainmenu.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
     
 }
 
@@ -75,16 +79,3 @@ h3{
     color: aliceblue;
     padding: 1.7rem;
 }
-
-
-
-.botJogar:hover {
-    background-color: rgb(158, 103, 209);
-}
-
-a:link, a:hover, a:visited, a:active{
-    color: aliceblue;
-    text-decoration: none;
-}
-
-

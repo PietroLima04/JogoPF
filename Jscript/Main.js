@@ -1,102 +1,101 @@
-const initialStones = [
-    { index: 0, x: 50, y: 50, speed: 6, isHidden: false },
+const Enemies = [
+    { index: 0, x: 50, y: 50, speed: 10, isHidden: false },
     { index: 1, x: 150, y: 100, speed: 6, isHidden: false },
     { index: 2, x: 500, y: 150, speed: 6, isHidden: false },
     { index: 3, x: 200, y: 500, speed: 6, isHidden: false },
     { index: 4, x: 700, y: 700, speed: 6, isHidden: false },
-];
+]
 
-const renderStones = (stones) => {
-    stones.forEach(stone => {
-        const stoneElement = document.querySelector(`.stone[data-index="${stone.index}"]`);
-        if (stone.isHidden) {
-            stoneElement.style.display = 'none';
+const createEnemies = (enemies) => {
+    const gameElement = document.getElementById('game')
+    gameElement.innerHTML = ''
+    enemies.map((enemy) => {
+        const enemyElement = document.createElement('div')
+        enemyElement.classList.add('enemy')
+        enemyElement.dataset.index = enemy.index
+        if (enemy.isHidden) {
+            enemyElement.classList.add('hidden')
+            enemyElement.style.display = 'none'
         } else {
-            stoneElement.style.display = 'block';
-            stoneElement.style.left = `${stone.x}px`;
-            stoneElement.style.top = `${stone.y}px`;
+            enemyElement.style.display = 'block'
+            enemyElement.style.left = `${enemy.x}px`
+            enemyElement.style.top = `${enemy.y}px`
         }
-    });
-};
+        gameElement.appendChild(enemyElement)
+    })
+}
 
-const checkCollision = (player, stoneElement) => {
-    const playerRect = player.getBoundingClientRect();
-    const stoneRect = stoneElement.getBoundingClientRect();
-    
-    return !(playerRect.right < stoneRect.left || 
-             playerRect.left > stoneRect.right || 
-             playerRect.bottom < stoneRect.top || 
-             playerRect.top > stoneRect.bottom);
-};
+const moveEnemies = (enemy, centerX, centerY) => {
+    const distanceX = centerX - enemy.x
+    const distanceY = centerY - enemy.y
+    const direction = Math.atan2(distanceY, distanceX)
+    return {
+        ...enemy,
+        x: enemy.x + Math.cos(direction) * enemy.speed,
+        y: enemy.y + Math.sin(direction) * enemy.speed
+    }
+}
 
-const moveStones = (stones, player) => stones.map(stone => {
-    if (stone.isHidden) return stone; // Não move pedras escondidas
+const updateEnemies = (enemies, container) => {
+    const centerX = container.offsetWidth / 2
+    const centerY = container.offsetHeight / 2
+    return enemies.map((enemy) => moveEnemies(enemy, centerX, centerY))
+}
 
-    const playerX = player.offsetLeft + player.offsetWidth / 2;
-    const playerY = player.offsetTop + player.offsetHeight / 2;
-    const directionX = playerX - (stone.x + 15);
-    const directionY = playerY - (stone.y + 15);
-    const distance = Math.sqrt(directionX ** 2 + directionY ** 2);
+const checkCollision = (player, enemyElement) => {
+    const playerArea = player.getBoundingClientRect()
+    const enemyArea = enemyElement.getBoundingClientRect()
+    return !(playerArea.right < enemyArea.left ||
+             playerArea.left > enemyArea.right ||
+             playerArea.bottom < enemyArea.top ||
+             playerArea.top > enemyArea.bottom)
+}
 
-    return distance > 0
-        ? { ...stone, x: stone.x + (directionX / distance) * stone.speed, y: stone.y + (directionY / distance) * stone.speed }
-        : stone;
-});
+const checkWinCondition = (enemies) => enemies.every((enemy) => enemy.isHidden)
 
-const handleClick = (event, stones) => {
-    return stones.map(stone => {
-        const stoneElement = document.querySelector(`.stone[data-index="${stone.index}"]`);
-        const rect = stoneElement.getBoundingClientRect();
-        const isClicked = event.clientX >= rect.left && event.clientX <= rect.right &&
-                          event.clientY >= rect.top && event.clientY <= rect.bottom;
-        
-        return isClicked ? { ...stone, isHidden: true } : stone;
-    });
-};
+const handleClick = (situation, enemies) => {
+    return enemies.map((enemy) => {
+        const enemyElement = document.querySelector(`.enemy[data-index="${enemy.index}"]`)
+        const area = enemyElement.getBoundingClientRect()
+        const isClicked = situation.clientX >= area.left && event.clientY <= area.right &&
+                          situation.clientY >= area.top && situation.clientY <= area.bottom
+        return isClicked ? { ...enemy, isHidden: true} : enemy                  
+    })
+}
 
-const checkWinCondition = (stones) => stones.every(stone => stone.isHidden);
-
-const voltarMenu = () => {
+const returnMenu = () => {
     window.location.href = 'index.html'
 }
 
-const gameLoop = (stones) => {
-    const player = document.getElementById('player');
-    const updatedStones = moveStones(stones, player);
-    renderStones(updatedStones);
-
-    const stoneElements = document.querySelectorAll('.stone');
-    stoneElements.forEach((stoneElement, index) => {
-        if (checkCollision(player, stoneElement) && !updatedStones[index].isHidden) {
-            alert('Game Over!');
-            clearInterval(gameInterval);
-            voltarMenu()
+const gameLoop = (enemies) => {
+    const player = document.getElementById('player')
+    const updatedEnemies = updateEnemies(enemies, document.getElementById('game'))
+    createEnemies(updatedEnemies)
+    const enemyElements = document.querySelectorAll('.enemy')
+    enemyElements.forEach((enemyElement, index) => {
+        if (checkCollision(player, enemyElement) && !updatedEnemies[index.isHidden]) {
+            alert('Game Over!')
+            clearInterval(gameInterval)
+            returnMenu()
         }
-    });
-
-    if (checkWinCondition(updatedStones)) {
-        alert('Você venceu!');
-        clearInterval(gameInterval);      
+    })
+    if (checkWinCondition(updatedEnemies)) {
+        alert('Você venceu!')
+        clearInterval(gameInterval)
+        window.location.href = 'game2.html'
     }
-
-    return updatedStones;
-};
+    return updatedEnemies
+}
 
 const startGame = () => {
-    let stones = [...initialStones];
-    renderStones(stones);
-
+    let enemies = [...Enemies]
+    createEnemies(enemies)
     document.addEventListener('click', (event) => {
-        stones = handleClick(event, stones);
-    });
-
+        enemies = handleClick(event, enemies)
+    })
     gameInterval = setInterval(() => {
-        stones = gameLoop(stones);
-    }, 100);
-};
+        enemies = gameLoop(enemies)
+    }, 100)
+}
 
-
-startGame();
-
-
-
+startGame()
