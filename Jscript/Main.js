@@ -1,3 +1,6 @@
+//O array Enemies define um grupo de inimigos no jogo com propriedades para posição, velocidade, identificador único e estado de 
+//visibilidade.
+
 const Enemies = [
     { index: 0, x: 100, y: 100, speed: 3, isHidden: false },
     { index: 1, x: 650, y: 200, speed: 3, isHidden: false },
@@ -8,6 +11,9 @@ const Enemies = [
 const proximaFase = () => {
     window.location.href = 'game-round2.html' //Função para para acessar próximo html referente a rodada.
 }
+
+//A função createEnemies cria elementos HTML para os inimigos, limpa o conteúdo do elemento 'game', adiciona classes e propriedades 
+//com base nas características dos inimigos e os posiciona na tela.
 
 const createEnemies = (enemies) => {
     const gameElement = document.getElementById('game')
@@ -28,6 +34,9 @@ const createEnemies = (enemies) => {
     })
 }
 
+//A função moveEnemies calcula a nova posição de um inimigo, movendo-o em direção ao centro do jogo. Usa a distância e o ângulo para 
+//atualizar as coordenadas X e Y, movendo o inimigo gradualmente para o centro.
+
 const moveEnemies = (enemy, centerX, centerY) => {
     const distanceX = centerX - enemy.x
     const distanceY = centerY - enemy.y
@@ -39,11 +48,16 @@ const moveEnemies = (enemy, centerX, centerY) => {
     }
 }
 
+//A função updateEnemies move os inimigos em direção ao centro do jogo, calculando as coordenadas centrais e atualizando suas posições 
+//com a função moveEnemies.
+
 const updateEnemies = (enemies, container) => {
     const centerX = container.offsetWidth / 2
     const centerY = container.offsetHeight / 2
     return enemies.map((enemy) => moveEnemies(enemy, centerX, centerY))
 }
+
+//A função checkCollision determina se o jogador e um inimigo colidem comparando as áreas que ambos ocupam na tela.
 
 const checkCollision = (player, enemyElement) => {
     const playerArea = player.getBoundingClientRect()
@@ -53,6 +67,9 @@ const checkCollision = (player, enemyElement) => {
              playerArea.bottom < enemyArea.top ||
              playerArea.top > enemyArea.bottom)
 }
+
+//A função checkWinCondition usa every para verificar se todos os inimigos estão escondidos, retornando true se estiverem e indicando
+//a vitória do jogador.
 
 const checkWinCondition = (enemies) => enemies.every((enemy) => enemy.isHidden)
 
