@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "TextoNormal" ;
+    src: url("../fonts/Silver.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
     display: flex;
     justify-content: center;
@@ -42,4 +50,14 @@ body {
 
 .stone.hidden {
     display: none;
+}
+
+#round {
+    position: fixed;
+    top: 350px;
+    left: 150px;
+    font-size: 80px;
+    font-family: 'TextoNormal';
+    color: rgb(255, 255, 255);
+    z-index: 20; /* Acima da máscara */
 }

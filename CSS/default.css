@@ -76,31 +76,6 @@ h3{
     padding: 1.7rem;
 }
 
-.botOpcoes {
-    background-color: rgb(133, 31, 228);
-    width: 300px;
-    height: 100px;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 4px 5px 4px black;
-    font-family: "TextoNormal";
-    font-size: 60px;
-    color: aliceblue;
-    padding: 1.7rem;
-}
-
-.botFechar {
-    background-color: rgb(133, 31, 228);
-    width: 300px;
-    height: 100px;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 4px 5px 4px black;
-    font-family: "TextoNormal";
-    font-size: 60px;
-    color: aliceblue;
-    padding: 1.7rem;
-}
 
 .botJogar:hover, .botOpcoes:hover, .botFechar:hover {
     background-color: rgb(158, 103, 209);
