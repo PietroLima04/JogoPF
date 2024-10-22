@@ -73,25 +73,28 @@ const checkCollision = (player, enemyElement) => {
 
 const checkWinCondition = (enemies) => enemies.every((enemy) => enemy.isHidden)
 
+//função que irá configurar o sistema de clique
 const handleClick = (situation, enemies) => {
-    return enemies.map((enemy) => {
-        const enemyElement = document.querySelector(`.enemy[data-index="${enemy.index}"]`)
-        const area = enemyElement.getBoundingClientRect()
-        const isClicked = situation.clientX >= area.left && event.clientY <= area.right &&
+    return enemies.map((enemy) => { //inicialmente aplicará um map na lista de inimigos
+        const enemyElement = document.querySelector(`.enemy[data-index="${enemy.index}"]`) //pegará o elemento do html correspondente ao inimigo, utilizando o index para se basear
+        const area = enemyElement.getBoundingClientRect() //determinará basicamente a área do inimigo, levando em conta seu tamanho e sua posição
+        const isClicked = situation.clientX >= area.left && situation.clientY <= area.right && //constante que servirá para checar se o clique foi feito dentro da área do inimigo, utilizando o elemento area
                           situation.clientY >= area.top && situation.clientY <= area.bottom
-        return isClicked ? { ...enemy, isHidden: true} : enemy                  
+        return isClicked ? { ...enemy, isHidden: true} : enemy //caso o inimigo, retornará este novo elemento hidden                 
     })
 }
 
+//função que vai fazer o jogo voltar ao menu, será utilizada para o gameover
 const returnMenu = () => {
     window.location.href = 'index.html'
 }
 
+//função que estabelecerá o loop do jogo
 const gameLoop = (enemies) => {
-    const player = document.getElementById('player')
-    const updatedEnemies = updateEnemies(enemies, document.getElementById('game'))
-    createEnemies(updatedEnemies)
-    const enemyElements = document.querySelectorAll('.enemy')
+    const player = document.getElementById('player') //vai selecionar o elemento com id = player no html
+    const updatedEnemies = updateEnemies(enemies, document.getElementById('game')) //vai ficar chamando a função updateEnemies para atualizar a posição dos inimigos
+    createEnemies(updatedEnemies) //vai criar novos inimigos com base nas novas posições e excluir os antigos
+    const enemyElements = document.querySelectorAll('.enemy') //vai selecionar todos os inimigos
     enemyElements.forEach((enemyElement, index) => {
         if (checkCollision(player, enemyElement) && !updatedEnemies[index.isHidden]) {
             alert('Game Over!')
@@ -99,23 +102,24 @@ const gameLoop = (enemies) => {
             returnMenu()
         }
     })
-    if (checkWinCondition(updatedEnemies)) {
+    if (checkWinCondition(updatedEnemies)) { //caso a condição de vitória seja alcançada, exibirá a mensagem e passará para a próxima fase
         alert('Você venceu!')
         clearInterval(gameInterval)
         proximaFase()
     }
-    return updatedEnemies
+    return updatedEnemies //vai retornar os inimigos atualizados
 }
 
+//função que iniciará o game loop
 const startGame = () => {
-    let enemies = [...Enemies]
-    createEnemies(enemies)
-    document.addEventListener('click', (event) => {
-        enemies = handleClick(event, enemies)
+    let enemies = [...Enemies] //cria uma cópia para não alterar a lista inicial
+    createEnemies(enemies) //vai establecer os inimigos na tela
+    document.addEventListener('click', (event) => { //função que vai determinar que quando um clique for detectado executará a função handleclick
+        enemies = handleClick(event, enemies) 
     })
-    gameInterval = setInterval(() => {
+    gameInterval = setInterval(() => { //vai estabelecer o gameloop sendo chamado a cada 100 milisegundos
         enemies = gameLoop(enemies)
     }, 100)
 }
 
-startGame()
+startGame() //chamada da função para iniciar tudo

@@ -1,3 +1,5 @@
+//Comentário do código é igual ao main
+
 const Enemies = [
     { index: 0, x: 50, y: 50, speed: 12, isHidden: false },
     { index: 1, x: 150, y: 100, speed: 12, isHidden: false },
