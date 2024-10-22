@@ -95,13 +95,21 @@ const gameLoop = (enemies) => {
     const updatedEnemies = updateEnemies(enemies, document.getElementById('game')) //vai ficar chamando a função updateEnemies para atualizar a posição dos inimigos
     createEnemies(updatedEnemies) //vai criar novos inimigos com base nas novas posições e excluir os antigos
     const enemyElements = document.querySelectorAll('.enemy') //vai selecionar todos os inimigos
-    enemyElements.forEach((enemyElement, index) => {
-        if (checkCollision(player, enemyElement) && !updatedEnemies[index.isHidden]) {
-            alert('Game Over!')
-            clearInterval(gameInterval)
-            returnMenu()
-        }
-    })
+     // Converte NodeList para array, mapeia cada inimigo para verificar colisões, e filtra os que colidiram
+  const collisions = Array.from(enemyElements)
+  .map((enemyElement, index) => ({
+      element: enemyElement, // Elemento inimigo
+      index: index, // Índice do inimigo
+      collided: checkCollision(player, enemyElement) && !updatedEnemies[index].isHidden // Verifica se colidiu e não está escondido
+  }))
+  .filter(({ collided }) => collided); // Filtra os inimigos que colidiram
+
+// Se houver colisões, exibe alerta de "Game Over", para o loop do jogo e retorna ao menu
+if (collisions.length > 0) {
+  alert('Game Over!');
+  clearInterval(gameInterval);
+  returnMenu();
+}
     if (checkWinCondition(updatedEnemies)) { //caso a condição de vitória seja alcançada, exibirá a mensagem e passará para a próxima fase
         alert('Você venceu!')
         clearInterval(gameInterval)

@@ -80,13 +80,19 @@ const gameLoop = (enemies) => {
     const updatedEnemies = updateEnemies(enemies, document.getElementById('game'))
     createEnemies(updatedEnemies)
     const enemyElements = document.querySelectorAll('.enemy')
-    enemyElements.forEach((enemyElement, index) => {
-        if (checkCollision(player, enemyElement) && !updatedEnemies[index.isHidden]) {
-            alert('Game Over!')
-            clearInterval(gameInterval)
-            returnMenu()
-        }
-    })
+  
+    const collisions = Array.from(enemyElements)
+  .map((enemyElement, index) => ({
+      element: enemyElement,
+      index: index, 
+      collided: checkCollision(player, enemyElement) && !updatedEnemies[index].isHidden 
+  }))
+  .filter(({ collided }) => collided);
+if (collisions.length > 0) {
+  alert('Game Over!');
+  clearInterval(gameInterval);
+  returnMenu();
+}
     if (checkWinCondition(updatedEnemies)) {
         alert('Você venceu!')
         clearInterval(gameInterval)
