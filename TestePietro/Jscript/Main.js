@@ -60,6 +60,7 @@ const createStoneElements = (stones) => {
     const centerHitbox = 20
     const newStones = updateStones(stones, container)
     container.innerHTML = ''
+  
     const stoneElements = createStoneElements(newStones)
     appendStonesToGame(stoneElements)
 

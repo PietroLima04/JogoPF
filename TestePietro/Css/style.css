@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #e0e0e0;
+    background-color: #333;
     
 }
 
@@ -12,12 +12,11 @@ body {
     width: 800px;
     height: 800px;
     border: 2px solid #333;
+    background: url(/Assets/backgroundimage.png);
 }
 
 #player {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position:absolute;
     width: 23px;
     height:32px;
     background-color: #007BFF;
@@ -26,7 +25,6 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background: url(/Assets/AnimationSheet_Character.png);
-    
     zoom: 1.5;
 }
 
@@ -35,10 +33,11 @@ body {
 
 .stone {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 47px;
+    height: 47px;
     background-color: #B22222;
     border-radius: 5px;
+    background: url(/Assets/enemy.png);
 }
 
 .stone.hidden {
