@@ -72,7 +72,7 @@ const handleClick = (situation, enemies) => {
 }
 
 const returnMenu = () => {
-    window.location.href = 'index.html'
+    window.location.href = '../index.html'
 }
 
 const gameLoop = (enemies) => {

@@ -86,7 +86,7 @@ const handleClick = (situation, enemies) => {
 
 //função que vai fazer o jogo voltar ao menu, será utilizada para o gameover
 const returnMenu = () => {
-    window.location.href = 'index.html'
+    window.location.href = '../index.html'
 }
 
 //função que estabelecerá o loop do jogo
