@@ -1,24 +1,30 @@
+@font-face {
+    font-family: "TextoNormal" ;
+    src: url("../fonts/Silver.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #474747;
+    background-color: #333;
     
 }
 
 #game {
-    position: relative;;
+    position: relative;
     width: 800px;
     height: 800px;
     border: 2px solid #333;
-    background-image: url('../Imagens/espaco.gif'); 
-    background-size: contain; 
-    
+    background: url(/Assets/backgroundimage.png);
 }
 
 #player {
-    position: absolute;
+    position:absolute;
     width: 23px;
     height:32px;
     background-color: #007BFF;
@@ -32,27 +38,18 @@ body {
 
 
 
+
 .stone {
     position: absolute;
-    width: 30px; 
-    height: 30px; 
-    background-image: url('../Imagens/mob.png'); 
-    background-size: contain; 
-    background-repeat: no-repeat;
+    width: 47px;
+    height: 47px;
+    background-color: #B22222;
+    border-radius: 5px;
+    background: url(/Assets/enemy.png);
 }
 
 .stone.hidden {
     display: none;
-}
-
-.nave {
-    position: absolute;
-    width: 40px;
-    height: 40px;;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
 }
 
 #round {
@@ -60,6 +57,7 @@ body {
     top: 350px;
     left: 150px;
     font-size: 80px;
+    font-family: 'TextoNormal';
     color: rgb(255, 255, 255);
     z-index: 20; /* Acima da máscara */
 }

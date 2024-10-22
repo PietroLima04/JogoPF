@@ -1,3 +1,6 @@
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+
 const initialStones = [
     { index: 0, x: 50, y: 50, speed: 1, isHidden: false },
     { index: 1, x: 150, y: 100, speed: 1, isHidden: false },
@@ -5,72 +8,31 @@ const initialStones = [
 ];
 
 const createStoneElements = (stones) => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
+    stones.forEach(stone => {
+        if (!stone.isHidden) {
+            ctx.beginPath();
+            ctx.arc(stone.x, stone.y, 15, 0, 2 * Math.PI); // Desenha a pedra
+            ctx.fill();
+        }
+    });
+};
+
+const handleClick = (event, stones) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
     return stones.map(stone => {
-      const stoneElement = document.createElement('div');
-      stoneElement.classList.add('stone')
-      if (stone.isHidden) {
-        stoneElement.classList.add('hidden')
-      }
-      stoneElement.style.left = `${stone.x}px`
-      stoneElement.style.top = `${stone.y}px`
-      return stoneElement
-    })
-  }
-  
-  const appendStonesToGame = ([...stoneElements]) => {
-    const gameElement = document.getElementById('game')
-    stoneElements.map(stoneElement => gameElement.appendChild(stoneElement))
-  }
+        const distance = Math.sqrt((stone.x - x) ** 2 + (stone.y - y) ** 2);
+        const isClicked = distance < 15; // Verifica se o clique está dentro do raio da pedra
+        return isClicked ? { ...stone, isHidden: true } : stone;
+    });
+};
 
-  const moveStones = (stones, centerX, centerY) => {
-    const distanceX = centerX - stones.x
-    const distanceY = centerY - stones.y
+canvas.addEventListener('click', (event) => {
+    initialStones = handleClick(event, initialStones);
+    createStoneElements(initialStones);
+});
 
-    const direction = Math.atan2(distanceY, distanceX)
-
-    return {
-        ...stones,
-        x: stones.x + Math.cos(direction) * stones.speed,
-        y: stones.y + Math.sin(direction) * stones.speed
-    }
-  }
-
-  const updateStones = (stones, container) => {
-    const centerX = container.offsetWidth / 2
-    const centerY = container.offsetHeight / 2
-    return stones.map((stone) => moveStones(stone, centerX, centerY))
-  }
-
-  const checkdistance = (centerX, centerY, stoneX, stoneY) => {
-  const distX = centerX - stoneX
-  const distY = centerY - stoneY
-  return Math.sqrt(distX**2 + distY**2)
-  }
-
-  const checkCollision = (stones, centerX, centerY, centerHitbox) => {
-    return stones.some((stone) => {
-      const distance = checkdistance(centerX, centerY, stone.x, stone.y)
-      return distance <= centerHitbox
-    })
-  }
-
-  const loop = (stones, container) => {
-    const centerX = container.offsetWidth / 2
-    const centerY = container.offsetHeight / 2
-    const centerHitbox = 20
-    const newStones = updateStones(stones, container)
-    container.innerHTML = ''
-  
-    const stoneElements = createStoneElements(newStones)
-    appendStonesToGame(stoneElements)
-
-    if (checkCollision(stones, centerX, centerY, centerHitbox)) {
-      alert('Game Over!')
-    return
-    }
-
-    requestAnimationFrame(() => loop(newStones, container))
-  }
-
-  const container = document.getElementById('game')
-  loop(initialStones, container)
+createStoneElements(initialStones);
