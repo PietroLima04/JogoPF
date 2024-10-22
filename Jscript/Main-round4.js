@@ -1,12 +1,15 @@
 const Enemies = [
-    { index: 0, x: 100, y: 100, speed: 3, isHidden: false },
-    { index: 1, x: 650, y: 200, speed: 3, isHidden: false },
-    { index: 2, x: 600, y: 600, speed: 3, isHidden: false },
-    { index: 3, x: 300, y: 750, speed: 3, isHidden: false },
-  ];
+    { index: 0, x: 10, y: 20, speed: 15, isHidden: false },
+    { index: 1, x: 750, y: 200, speed: 15, isHidden: false },
+    { index: 2, x: 20, y: 250, speed: 15, isHidden: false },
+    { index: 3, x: 500, y: 10, speed: 15, isHidden: false },
+    { index: 4, x: 750, y: 550, speed: 15, isHidden: false },
+    { index: 5, x: 750, y: 250, speed: 15, isHidden: false},
+    { index: 6, x: 10, y: 750, speed: 15, isHidden: false},
+];
 
 const proximaFase = () => {
-    window.location.href = 'game-round2.html' //Função para para acessar próximo html referente a rodada.
+    window.location.href = 'index.html' //Função para para acessar próximo html referente a rodada.
 }
 
 const createEnemies = (enemies) => {
