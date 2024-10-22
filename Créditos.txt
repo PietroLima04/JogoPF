@@ -1,0 +1,7 @@
+asset do protagonista: https://penzilla.itch.io/hooded-protagonist?download
+
+asset dos inimigos: https://gamesupply.itch.io/free-3-in-a-row-game-asset
+
+tileset do cenário criado usando: https://codepen.io/punkydrewster713/pen/QWymBGy
+
+imagem do menu: https://wall.alphacoders.com/big.php?i=1265738

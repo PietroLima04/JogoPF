@@ -1,0 +1,3 @@
+Clique repetidamente nos inimigos para matá-los.
+Ao concluir um round partirá para o próximo.
+Caso você perca, voltará ao menu.
